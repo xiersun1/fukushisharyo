@@ -1,0 +1,94 @@
+local_backend: true
+
+backend:
+  name: github
+  repo: xiersun1/fukushisharyo
+  branch: main
+  use_graphql: true
+  site_domain: "https://fukushi-sharyo.yakami.or.jp"
+  base_url: "https://fukushi-sharyo.yakami.or.jp"
+  auth_endpoint: "/api/auth"
+
+publish_mode: simple
+media_folder: "src/assets/uploads"
+public_folder: "/assets/uploads"
+site_url: "https://fukushi-sharyo.yakami.or.jp/"
+display_url: "https://fukushi-sharyo.yakami.or.jp/"
+locale: "ja"
+search: false
+
+collections:
+  - name: "site_data"
+    label: "サイトデータ"
+    files:
+      - name: "sources"
+        label: "応募先一覧"
+        file: "src/data/sources.json"
+        format: "json"
+        fields:
+          - label: "更新日"
+            name: "updatedAt"
+            widget: "string"
+            hint: "例: 2026-07-10"
+          - label: "応募先"
+            name: "sources"
+            widget: "list"
+            summary: "{{fields.title}} / {{fields.org}}"
+            fields:
+              - label: "制度名"
+                name: "title"
+                widget: "string"
+              - label: "団体"
+                name: "org"
+                widget: "string"
+              - label: "状態コード"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "重点監視", value: "watch" }
+                  - { label: "受付終了", value: "closed" }
+                  - { label: "地域確認", value: "regional" }
+                  - { label: "登録準備", value: "prep" }
+              - label: "状態表示"
+                name: "statusLabel"
+                widget: "string"
+              - label: "地域コード"
+                name: "region"
+                widget: "select"
+                options:
+                  - { label: "全国", value: "nationwide" }
+                  - { label: "西日本", value: "west" }
+                  - { label: "地域別", value: "regional" }
+              - label: "地域表示"
+                name: "regionLabel"
+                widget: "string"
+              - label: "受付時期"
+                name: "period"
+                widget: "string"
+              - label: "対象・要点"
+                name: "target"
+                widget: "text"
+              - label: "概要"
+                name: "summary"
+                widget: "text"
+              - label: "公式URL"
+                name: "url"
+                widget: "string"
+              - label: "確認日"
+                name: "lastChecked"
+                widget: "string"
+                hint: "例: 2026-07-10"
+              - label: "根拠メモ"
+                name: "evidence"
+                widget: "text"
+              - label: "運用メモ"
+                name: "note"
+                widget: "text"
+                required: false
+              - label: "タグ"
+                name: "tags"
+                widget: "list"
+                field:
+                  label: "タグ"
+                  name: "tag"
+                  widget: "string"
