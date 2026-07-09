@@ -5,15 +5,15 @@ backend:
   repo: xiersun1/fukushisharyo
   branch: main
   use_graphql: true
-  site_domain: "https://fukushi-sharyo.yakami.or.jp"
-  base_url: "https://fukushi-sharyo.yakami.or.jp"
+  site_domain: "https://fukushisharyo.pages.dev"
+  base_url: "https://fukushisharyo.pages.dev"
   auth_endpoint: "/api/auth"
 
 publish_mode: simple
 media_folder: "src/assets/uploads"
 public_folder: "/assets/uploads"
-site_url: "https://fukushi-sharyo.yakami.or.jp/"
-display_url: "https://fukushi-sharyo.yakami.or.jp/"
+site_url: "https://fukushisharyo.pages.dev/"
+display_url: "https://fukushisharyo.pages.dev/"
 locale: "ja"
 search: false
 
