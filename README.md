@@ -27,13 +27,10 @@ npm run serve
 
 無料で始める場合は、GitHub + Cloudflare Pages + Decap CMS の構成にします。
 
+- Production URL: `https://fukushisharyo.pages.dev/`
 - Build command: `npm run build`
 - Build output directory: `dist`
 - 管理画面: `/admin/`
-
-同じドメインで既存HPと切り離す場合は、次のどちらかを使います。
-
-- `https://fukushi-sharyo.yakami.or.jp/`
 
 ## Decap CMS
 
@@ -46,5 +43,5 @@ CMS設定は `src/admin/config.yml` です。GitHubリポジトリは `xiersun1/
 
 GitHub OAuth AppのURL:
 
-- Homepage URL: `https://fukushi-sharyo.yakami.or.jp`
-- Authorization callback URL: `https://fukushi-sharyo.yakami.or.jp/api/callback`
+- Homepage URL: `https://fukushisharyo.pages.dev`
+- Authorization callback URL: `https://fukushisharyo.pages.dev/api/callback`
