@@ -21,8 +21,8 @@ collections:
   - name: "site_data"
     label: "サイトデータ"
     files:
-      - name: "sources"
-        label: "応募先一覧"
+      - name: "notices"
+        label: "お知らせ一覧"
         file: "src/data/sources.json"
         format: "json"
         fields:
@@ -30,65 +30,49 @@ collections:
             name: "updatedAt"
             widget: "string"
             hint: "例: 2026-07-10"
-          - label: "応募先"
-            name: "sources"
+          - label: "お知らせ"
+            name: "notices"
             widget: "list"
-            summary: "{{fields.title}} / {{fields.org}}"
+            summary: "{{fields.publishedAt}} / {{fields.title}}"
             fields:
-              - label: "制度名"
+              - label: "ID"
+                name: "id"
+                widget: "string"
+                hint: "英数字とハイフンで一意にします"
+              - label: "掲載日"
+                name: "publishedAt"
+                widget: "string"
+                hint: "例: 2026-07-10"
+              - label: "タイトル"
                 name: "title"
                 widget: "string"
               - label: "団体"
                 name: "org"
                 widget: "string"
               - label: "状態コード"
-                name: "status"
+                name: "statusCode"
                 widget: "select"
                 options:
-                  - { label: "重点監視", value: "watch" }
-                  - { label: "受付終了", value: "closed" }
-                  - { label: "地域確認", value: "regional" }
-                  - { label: "登録準備", value: "prep" }
+                  - { label: "受付中", value: "open" }
+                  - { label: "受付予定", value: "upcoming" }
+                  - { label: "終了", value: "closed" }
+                  - { label: "監視中", value: "watch" }
               - label: "状態表示"
                 name: "statusLabel"
                 widget: "string"
-              - label: "地域コード"
-                name: "region"
-                widget: "select"
-                options:
-                  - { label: "全国", value: "nationwide" }
-                  - { label: "西日本", value: "west" }
-                  - { label: "地域別", value: "regional" }
-              - label: "地域表示"
-                name: "regionLabel"
-                widget: "string"
-              - label: "受付時期"
+              - label: "応募期間"
                 name: "period"
                 widget: "string"
-              - label: "対象・要点"
-                name: "target"
-                widget: "text"
               - label: "概要"
                 name: "summary"
                 widget: "text"
-              - label: "公式URL"
-                name: "url"
+              - label: "詳細リンク"
+                name: "detailUrl"
                 widget: "string"
               - label: "確認日"
-                name: "lastChecked"
+                name: "checkedAt"
                 widget: "string"
                 hint: "例: 2026-07-10"
               - label: "根拠メモ"
-                name: "evidence"
+                name: "sourceNote"
                 widget: "text"
-              - label: "運用メモ"
-                name: "note"
-                widget: "text"
-                required: false
-              - label: "タグ"
-                name: "tags"
-                widget: "list"
-                field:
-                  label: "タグ"
-                  name: "tag"
-                  widget: "string"
