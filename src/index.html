@@ -4,164 +4,33 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>福祉車両応募アラート</title>
-  <meta name="description" content="日本の福祉車両贈呈・助成の応募開始、締切、要項更新を早く確認するための情報サイトです。">
+  <meta name="description" content="福祉車両の贈呈・助成情報をお知らせ形式で確認できるサイトです。">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-  <header class="header">
-    <div>
-      <p class="label">福祉車両応募アラート</p>
-      <h1>応募開始と締切を見逃さない</h1>
-    </div>
-    <nav aria-label="ページ内メニュー">
-      <a href="#list">一覧</a>
-      <a href="#alert">通知</a>
-      <a href="#automation">運用</a>
-      <a href="#cms">CMS</a>
-      <a href="admin/">管理画面</a>
-    </nav>
+  <header class="site-header">
+    <h1>福祉車両応募アラート</h1>
   </header>
 
   <main>
-    <section class="summary" aria-label="現在の監視状況">
-      <article><span>登録先</span><strong id="totalCount">0</strong></article>
-      <article><span>重点監視</span><strong id="watchCount">0</strong></article>
-      <article><span>地域確認</span><strong id="regionalCount">0</strong></article>
-      <article><span>データ更新</span><strong id="checkedDate">2026.07.10</strong></article>
+    <section class="notice-list" aria-label="お知らせ">
+      <div id="noticeList" class="notices"></div>
+      <p id="dataStatus" class="data-status">お知らせを読み込み中です。</p>
     </section>
 
-    <section class="panel compact">
-      <h2>このサイトの役割</h2>
-      <p>全国制度、民間財団、共同募金会、自治体・社協の車両系助成を一覧化し、応募開始・締切・要項変更を早く確認します。既存HPと同じドメインで公開できますが、WordPressとは別の静的サイトとして切り離します。</p>
-      <p class="system-status" id="dataStatus">データ読込中</p>
-    </section>
-
-    <section class="panel" id="list">
-      <div class="panel-head">
-        <div>
-          <h2>応募先一覧</h2>
-          <p>公式ページを確認した情報をもとに、制度・地域・状態で絞り込めます。</p>
-        </div>
-        <button id="downloadCsv" type="button">CSV出力</button>
-      </div>
-
-      <div class="filters" aria-label="絞り込み">
+    <section class="mail-box" aria-label="メール登録">
+      <h2>メール登録</h2>
+      <form id="alertForm" class="mail-form">
         <label>
-          <span>地域</span>
-          <select id="regionFilter">
-            <option value="all">すべて</option>
-            <option value="nationwide">全国</option>
-            <option value="west">西日本</option>
-            <option value="regional">地域別</option>
-          </select>
+          <span>メールアドレス</span>
+          <input id="emailInput" type="email" placeholder="sample@example.jp" autocomplete="email" required>
         </label>
-        <label>
-          <span>状態</span>
-          <select id="statusFilter">
-            <option value="all">すべて</option>
-            <option value="watch">重点監視</option>
-            <option value="closed">受付終了</option>
-            <option value="regional">地域確認</option>
-            <option value="prep">登録準備</option>
-          </select>
-        </label>
-        <label>
-          <span>検索</span>
-          <input id="keywordFilter" type="search" placeholder="例: NPO、共同募金、締切、徳島">
-        </label>
-        <button id="resetFilters" type="button">解除</button>
-      </div>
-
-      <p class="result"><span id="resultCount">0</span>件表示中</p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>制度名</th>
-              <th>団体</th>
-              <th>状態</th>
-              <th>地域</th>
-              <th>受付時期</th>
-              <th>対象・要点</th>
-              <th>公式</th>
-            </tr>
-          </thead>
-          <tbody id="sourceRows"></tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="grid">
-      <section class="panel" id="alert">
-        <h2>通知条件</h2>
-        <form id="alertForm" class="form">
-          <label>
-            <span>メール</span>
-            <input type="email" placeholder="sample@example.jp" required>
-          </label>
-          <label>
-            <span>地域</span>
-            <select>
-              <option>全国すべて</option>
-              <option>徳島県</option>
-              <option>西日本</option>
-              <option>地域別に選ぶ</option>
-            </select>
-          </label>
-          <fieldset>
-            <legend>通知する内容</legend>
-            <label><input type="checkbox" checked> 募集開始</label>
-            <label><input type="checkbox" checked> 締切前</label>
-            <label><input type="checkbox" checked> 要項・様式更新</label>
-          </fieldset>
-          <button type="submit">登録デモ</button>
-          <p id="formMessage">この確認版では送信しません。本番では通知登録につなげます。</p>
-        </form>
-      </section>
-
-      <section class="panel">
-        <h2>監視ルール</h2>
-        <table class="small-table">
-          <tbody>
-            <tr><th>通常時</th><td>6時間ごとに公式ページを確認</td></tr>
-            <tr><th>募集時期</th><td>15分ごとに重点監視</td></tr>
-            <tr><th>通知</th><td>募集開始、締切前、要項変更を通知</td></tr>
-            <tr><th>確認先</th><td>公式ページ、PDF、申請フォーム、告知ページ</td></tr>
-          </tbody>
-        </table>
-      </section>
-    </section>
-
-    <section class="panel" id="automation">
-      <h2>WordPressなしの自動管理</h2>
-      <table class="small-table">
-        <tbody>
-          <tr><th>公開</th><td>HTML、CSS、JavaScriptだけの静的サイト。既存HPのWordPressには入れません。</td></tr>
-          <tr><th>データ</th><td>応募先、状態、締切、公式URLを <code>data/sources.json</code> で管理します。</td></tr>
-          <tr><th>CMS</th><td>Decap CMSでJSONを編集します。管理画面は <code>/admin/</code> です。</td></tr>
-          <tr><th>AI監視</th><td>AIが公式ページを読み取り、募集開始・締切・要項変更を分類します。</td></tr>
-          <tr><th>反映</th><td>AIまたは管理者がJSONを更新し、GitHub経由で自動公開します。</td></tr>
-        </tbody>
-      </table>
-      <p class="note">CMSは「編集画面」、JSONは「一覧データ」、静的サイトは「表示専用の軽いサイト」です。</p>
-    </section>
-
-    <section class="panel" id="cms">
-      <h2>無料Headless CMS構成</h2>
-      <dl class="publish-list">
-        <div><dt>CMS</dt><dd>Decap CMS。無料・オープンソースで、GitHub上のJSONを編集します。</dd></div>
-        <div><dt>公開先</dt><dd>Cloudflare Pages。Build commandは <code>npm run build</code>、出力先は <code>dist</code> です。</dd></div>
-        <div><dt>同じドメイン</dt><dd><code>https://yakami.or.jp/fukushi-sharyo-alert/</code> または <code>https://fukushi-sharyo.yakami.or.jp/</code></dd></div>
-        <div><dt>切り離し方</dt><dd>既存HPのテーマ、メニュー、WordPress管理画面を使わず、別リポジトリ・別デプロイで管理します。</dd></div>
-      </dl>
+        <button type="submit">登録</button>
+      </form>
+      <p id="formMessage" class="form-message">応募開始や締切前のお知らせを受け取るための登録欄です。</p>
     </section>
   </main>
-
-  <footer>
-    非公式の情報整理サイト案です。申請前には必ず公式ページで最新情報を確認してください。
-  </footer>
 
   <script src="assets/app.js"></script>
 </body>
