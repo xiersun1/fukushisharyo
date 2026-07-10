@@ -41,13 +41,13 @@ function assertFile(filePath) {
 function validateSources() {
   const dataPath = path.join(src, "data", "sources.json");
   const data = JSON.parse(fs.readFileSync(dataPath, "utf8"));
-  if (!data.updatedAt || !Array.isArray(data.sources)) {
-    throw new Error("sources.json must include updatedAt and sources[]");
+  if (!data.updatedAt || !Array.isArray(data.notices)) {
+    throw new Error("sources.json must include updatedAt and notices[]");
   }
-  for (const source of data.sources) {
-    for (const key of ["title", "org", "status", "region", "period", "target", "summary", "url"]) {
-      if (!source[key]) {
-        throw new Error(`sources.json missing ${key}: ${source.title || "(no title)"}`);
+  for (const notice of data.notices) {
+    for (const key of ["id", "publishedAt", "title", "org", "statusCode", "statusLabel", "period", "summary", "detailUrl", "checkedAt"]) {
+      if (!notice[key]) {
+        throw new Error(`sources.json missing ${key}: ${notice.title || "(no title)"}`);
       }
     }
   }
