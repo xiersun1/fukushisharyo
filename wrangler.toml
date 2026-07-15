@@ -1,0 +1,15 @@
+name = "fukushisharyo"
+pages_build_output_dir = "./dist"
+compatibility_date = "2026-07-09"
+
+[[d1_databases]]
+binding = "SUBSCRIBERS_DB"
+database_name = "fukushisharyo-subscribers"
+database_id = "7413c31d-ab6a-4242-9ff6-be9d25ffa4b5"
+
+[vars]
+SITE_URL = "https://fukushisharyo.pages.dev"
+MAIL_FROM = "福祉車両応募アラート <alert@notify.yakami.or.jp>"
+REPLY_TO = "fukushisharyo@yakami.or.jp"
+NOTIFY_START_DATE = "2026-07-16"
+MAX_EMAILS_PER_DISPATCH = "90"
