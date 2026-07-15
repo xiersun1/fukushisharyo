@@ -191,6 +191,28 @@ button:focus-visible {
   background: #303844;
 }
 
+button:disabled {
+  cursor: wait;
+  opacity: .6;
+}
+
+.form-trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.privacy-link {
+  margin-top: 4px;
+  font-size: .82rem;
+}
+
+.privacy-page h2 {
+  margin-top: 24px;
+}
+
 @media (max-width: 620px) {
   h1 { font-size: 1.45rem; }
   .notice { padding: 14px; }
@@ -199,3 +221,4 @@ button:focus-visible {
     grid-template-columns: 1fr;
   }
 }
+

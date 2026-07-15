@@ -1,8 +1,10 @@
-const fs = require("fs");
-const http = require("http");
-const path = require("path");
+import fs from "node:fs";
+import http from "node:http";
+import path from "node:path";
+import process from "node:process";
+import { fileURLToPath } from "node:url";
 
-const root = path.resolve(__dirname, "..", "dist");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "dist");
 const port = Number(process.env.PORT || 8787);
 const types = {
   ".html": "text/html; charset=utf-8",
@@ -37,3 +39,4 @@ http.createServer((req, res) => {
 }).listen(port, "127.0.0.1", () => {
   console.log(`Serving http://127.0.0.1:${port}/`);
 });
+

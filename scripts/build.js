@@ -1,16 +1,22 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = path.resolve(__dirname, "..");
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const src = path.join(root, "src");
 const dist = path.join(root, "dist");
 const requiredFiles = [
   "index.html",
   "assets/app.js",
   "assets/styles.css",
+  "assets/admin.js",
+  "assets/admin.css",
   "data/sources.json",
+  "admin-subscribers/index.html",
   "admin/index.html",
-  "admin/config.yml"
+  "admin/config.yml",
+  "privacy.html",
+  "_routes.json"
 ];
 
 function removeDir(target) {
@@ -62,3 +68,4 @@ removeDir(dist);
 copyDir(src, dist);
 
 console.log(`Built ${path.relative(root, dist)} from ${path.relative(root, src)}`);
+

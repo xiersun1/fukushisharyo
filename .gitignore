@@ -1,4 +1,8 @@
+dist/
 node_modules/
 .DS_Store
 *.log
 .tmp-*/
+.dev.vars
+.wrangler/
+

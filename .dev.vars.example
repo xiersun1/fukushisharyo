@@ -1,0 +1,11 @@
+RESEND_API_KEY=re_example
+MAIL_FROM=福祉車両応募アラート <alert@notify.example.jp>
+REPLY_TO=contact@example.jp
+SITE_URL=http://127.0.0.1:8788
+ADMIN_PASSWORD=replace-with-a-long-password
+ADMIN_SESSION_SECRET=replace-with-a-random-secret
+TOKEN_SECRET=replace-with-another-random-secret
+NOTIFY_WEBHOOK_SECRET=replace-with-a-third-random-secret
+NOTIFY_START_DATE=2026-07-15
+MAX_EMAILS_PER_DISPATCH=90
+

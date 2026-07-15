@@ -2,12 +2,15 @@
   "name": "fukushi-sharyo-alert",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "福祉車両贈呈・助成の応募開始を知らせる静的サイトとDecap CMS構成",
   "scripts": {
     "build": "node scripts/build.js",
-    "serve": "node scripts/serve.js"
+    "serve": "node scripts/serve.js",
+    "test": "node --test"
   },
   "engines": {
     "node": ">=18"
   }
 }
+

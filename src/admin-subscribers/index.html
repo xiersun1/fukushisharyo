@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>通知管理 | 福祉車両応募アラート</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/assets/admin.css">
+</head>
+<body>
+  <header class="admin-header">
+    <h1>福祉車両応募アラート 管理</h1>
+    <button id="logoutButton" type="button" class="secondary" hidden>ログアウト</button>
+  </header>
+
+  <main>
+    <section id="loginSection" class="login-section">
+      <h2>管理者ログイン</h2>
+      <form id="loginForm">
+        <label>
+          <span>管理パスワード</span>
+          <input id="passwordInput" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">ログイン</button>
+      </form>
+      <p id="loginMessage" class="message" aria-live="polite"></p>
+    </section>
+
+    <div id="dashboard" hidden>
+      <section class="stats" aria-label="集計">
+        <div><span>PV（30日）</span><strong id="pageViewCount">0</strong></div>
+        <div><span>登録中</span><strong id="activeCount">0</strong></div>
+        <div><span>確認待ち</span><strong id="pendingCount">0</strong></div>
+        <div><span>解除済み</span><strong id="unsubscribedCount">0</strong></div>
+      </section>
+
+      <p id="mailStatus" class="system-status"></p>
+
+      <section class="admin-section send-section">
+        <div>
+          <h2>通知配信</h2>
+          <select id="noticeSelect" aria-label="配信するお知らせ"></select>
+        </div>
+        <button id="sendButton" type="button">選択記事を配信</button>
+        <p id="sendMessage" class="message" aria-live="polite"></p>
+      </section>
+
+      <section class="admin-section">
+        <div class="section-head">
+          <h2>登録メールアドレス</h2>
+          <div class="actions">
+            <button id="refreshButton" type="button" class="secondary">更新</button>
+            <button id="exportButton" type="button" class="secondary">CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>メールアドレス</th><th>状態</th><th>登録日時</th><th>確認日時</th><th>解除日時</th></tr></thead>
+            <tbody id="subscriberRows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="two-column">
+        <section class="admin-section">
+          <h2>日別PV</h2>
+          <div class="table-wrap compact-table">
+            <table>
+              <thead><tr><th>日付</th><th>PV</th></tr></thead>
+              <tbody id="pageViewRows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="admin-section">
+          <h2>配信履歴</h2>
+          <div class="table-wrap compact-table">
+            <table>
+              <thead><tr><th>お知らせ</th><th>送信</th><th>失敗</th><th>完了日時</th></tr></thead>
+              <tbody id="campaignRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/admin.js"></script>
+</body>
+</html>
+

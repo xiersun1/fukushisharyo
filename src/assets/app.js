@@ -7,7 +7,9 @@ const noticeList = document.querySelector("#noticeList");
 const dataStatus = document.querySelector("#dataStatus");
 const alertForm = document.querySelector("#alertForm");
 const emailInput = document.querySelector("#emailInput");
+const companyInput = document.querySelector("#companyInput");
 const formMessage = document.querySelector("#formMessage");
+const submitButton = alertForm.querySelector('button[type="submit"]');
 
 function escapeHtml(value = "") {
   return String(value).replace(/[&<>"']/g, (char) => ({
@@ -97,12 +99,40 @@ async function loadNotices() {
   }
 }
 
-alertForm.addEventListener("submit", (event) => {
+alertForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const email = emailInput.value.trim();
   if (!email) return;
-  localStorage.setItem("fukushi-sharyo-alert-email", email);
-  formMessage.textContent = "登録内容を保存しました。メール配信の接続後、このアドレスに通知します。";
+
+  submitButton.disabled = true;
+  formMessage.textContent = "確認メールを送信しています。";
+
+  try {
+    const response = await fetch("/api/subscribe", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ email, company: companyInput.value })
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.message || "登録できませんでした。");
+    alertForm.reset();
+    formMessage.textContent = result.message;
+  } catch (error) {
+    formMessage.textContent = error.message || "登録できませんでした。時間をおいて再度お試しください。";
+  } finally {
+    submitButton.disabled = false;
+  }
 });
 
+function trackPageView() {
+  fetch("/api/pageview", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ path: window.location.pathname }),
+    keepalive: true
+  }).catch(() => {});
+}
+
 loadNotices();
+trackPageView();
+

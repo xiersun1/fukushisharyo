@@ -26,12 +26,18 @@
           <span>メールアドレス</span>
           <input id="emailInput" type="email" placeholder="sample@example.jp" autocomplete="email" required>
         </label>
+        <label class="form-trap" aria-hidden="true">
+          <span>空欄のままにしてください</span>
+          <input id="companyInput" type="text" name="company" tabindex="-1" autocomplete="off">
+        </label>
         <button type="submit">登録</button>
       </form>
-      <p id="formMessage" class="form-message">応募開始や締切前のお知らせを受け取るための登録欄です。</p>
+      <p id="formMessage" class="form-message" aria-live="polite">確認メール内のリンクを押すと登録が完了します。</p>
+      <p class="privacy-link"><a href="/privacy.html">メールアドレスの取扱い</a></p>
     </section>
   </main>
 
   <script src="assets/app.js"></script>
 </body>
 </html>
+
